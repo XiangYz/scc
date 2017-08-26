@@ -7,3 +7,4 @@ scc/Debug/
 scc/Release/
 *.filters
 *.user
+*.sln
