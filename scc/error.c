@@ -47,7 +47,7 @@ void error(char* fmt, ...)
 }
 
 
-void except(char* msg)
+void expect(char* msg)
 {
 	error("need %s", msg);
 }

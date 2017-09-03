@@ -21,7 +21,7 @@ enum e_WorkStage
 void handle_exception(int stage, int level, char* fmt, va_list ap);
 void warning(char* fmt, ...);
 void error(char* fmt, ...);
-void except(char* msg);
+void expect(char* msg);
 void skip(int c);
 char* get_tkstr(int v);
 void link_error(char* fmt, ...);

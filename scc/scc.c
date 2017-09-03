@@ -4,6 +4,7 @@
 #include "Token.h"
 #include "lexer.h"
 #include "error.h"
+#include "parser.h"
 
 #include <Windows.h>
 
@@ -60,6 +61,44 @@ void color_token(int lex_state)
 	}
 }
 
+
+void print_tab(int n)
+{
+	int i = 0;
+	for (; i < n; ++i)
+		printf("\t");
+}
+
+void syntax_indent()
+{
+	switch (syntax_state)
+	{
+	case SNTX_NUL:
+		color_token(LEX_NORMAL);
+		break;
+	case SNTX_SP:
+		printf(" ");
+		color_token(LEX_NORMAL);
+		break;
+	case SNTX_LF_HT:
+	{
+		if (token == TK_END)
+			syntax_level--;
+		printf("\n");
+		print_tab(syntax_level);
+	}
+	color_token(LEX_NORMAL);
+	break;
+	case SNTX_DELAY:
+		break;
+
+	} // switch
+
+	syntax_state = SNTX_NUL;
+}
+
+
+
 int main(int argc, char* argv[])
 {
 	fin = fopen(argv[1], "rb");
@@ -72,17 +111,21 @@ int main(int argc, char* argv[])
 	init();
 
 	getch();
+	/*
 	do
 	{
 		get_token();
 		color_token(LEX_NORMAL);
 	} while (token != TK_EOF);
-
 	printf("\nline number: %d\n", line_num);
+	*/
+
+	get_token();
+	translation_unit();
 
 	cleanup();
 	fclose(fin);
-	printf("%slex parse finished!", argv[1]);
+	printf("\n%s parse finished!", argv[1]);
 
 	
 

@@ -6,6 +6,7 @@
 #include "error.h"
 
 
+
 TkWord* tk_hashtable[MAXKEY];	//单词哈希表
 DynArray tktable;				//单词表
 
@@ -395,6 +396,9 @@ void get_token()
 		break;
 	}// switch
 
+	void syntax_indent();
+
+	syntax_indent();
 
 }
 
